@@ -1,32 +1,32 @@
 import { useState } from "react";
 
 export default function Form({ onAddTodos }) {
-  const [addItem, setAddItem] = useState("");
-  const [priority, setPriority] = useState("green");
+  const [todo, setTodo] = useState("");
+  const [priority, setPriority] = useState("low priority");
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!addItem) return;
-    const newTodo = { addItem, priority, packed: false, id: Date.now() };
+    if (!todo) return;
+    const newTodo = { todo, priority, packed: false, id: Date.now() };
     console.log(newTodo);
     onAddTodos(newTodo);
-    setAddItem("");
+    setTodo("");
     setPriority("");
   }
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="form flex-center" onSubmit={handleSubmit}>
       <h2>Add new todo</h2>
       <select value={priority} onChange={(e) => setPriority(e.target.value)}>
-        <option>green</option>
-        <option>yellow</option>
-        <option>red</option>
+        <option>low priority</option>
+        <option>high priority</option>
+        <option>mid priority</option>
       </select>
       <input
         type="text"
         placeholder="item..."
-        value={addItem}
-        onChange={(e) => setAddItem(e.target.value)}
+        value={todo}
+        onChange={(e) => setTodo(e.target.value)}
       />
       <button>ADD</button>
     </form>
